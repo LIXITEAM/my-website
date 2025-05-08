@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aimlock UI</title>
+    <style>
+        body {
+            text-align: center;
+            background: #1a1a1a;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: inline-block;
+            position: relative;
+        }
+        .target-img {
+            width: 200px;
+            filter: brightness(50%);
+        }
+        .highlight {
+            filter: brightness(100%);
+        }
+        .controls {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Aimlock UI</h1>
+    <div class="container">
+        <img id="target" src="file-5g6bzXbYo1LBKkZAZnHRRb" class="target-img" alt="Person Target">
+    </div>
+    <div class="controls">
+        <label>Chọn Vùng Aimlock:</label>
+        <select id="aimlockSelect">
+            <option value="head">Đầu</option>
+            <option value="chest">Ngực</option>
+            <option value="legs">Chân</option>
+        </select>
+        <br><br>
+        <label>Tỷ lệ Headshot (%):</label>
+        <input type="range" id="headshotRange" min="0" max="100" value="50">
+        <span id="headshotValue">50%</span>
+    </div>
+    
+    <script>
+        document.getElementById("headshotRange").addEventListener("input", function() {
+            document.getElementById("headshotValue").innerText = this.value + "%";
+        });
+        
+        document.getElementById("aimlockSelect").addEventListener("change", function() {
+            let img = document.getElementById("target");
+            img.classList.remove("highlight");
+            setTimeout(() => img.classList.add("highlight"), 100);
+        });
+    </script>
+</body>
+</html>
