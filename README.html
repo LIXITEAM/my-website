@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>VIP GAMING LOGIN</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(-45deg, #0f0f0f, #1c1c1c, #111);
+      background-size: 400% 400%;
+      animation: bgMove 10s ease infinite;
+      overflow: hidden;
+      color: white;
+    }
+
+    @keyframes bgMove {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    .box {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 30px;
+      border-radius: 20px;
+      width: 350px;
+      margin: 100px auto;
+      box-shadow: 0 0 20px red;
+      border: 2px solid transparent;
+      border-image: linear-gradient(45deg, red, #ff00f7, cyan) 1;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px red;
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      background: #111;
+      color: white;
+      border: 2px solid red;
+      border-radius: 10px;
+      font-family: 'Orbitron';
+    }
+
+    button {
+      padding: 10px 30px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(to right, red, #ff00f7);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 10px red;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #ff00f7;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #444;
+      transition: .4s;
+      border-radius: 34px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px; width: 26px;
+      left: 4px; bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: #ff0033;
+      box-shadow: 0 0 10px red;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+
+    #snow {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0; left: 0;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    #aimStatus {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #888;
+    }
+
+  </style>
+</head>
+<body>
+
+<div id="snow"></div>
+
+<div class="box" id="loginBox">
+  <h2>🔐 VIP GAMING LOGIN</h2>
+  <input type="text" id="username" placeholder="Username">
+  <input type="password" id="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+</div>
+
+<div class="box" id="panelBox" style="display:none;">
+  <h2>💀 Welcome, VIP1</h2>
+
+  <div style="margin-top: 20px;">
+    <label class="switch">
+      <input type="checkbox" id="aimToggle" onchange="toggleAimbot()">
+      <span class="slider"></span>
+    </label>
+    <p id="aimStatus">AIMBOT: TẮT</p>
+  </div>
+</div>
+
+<script>
+  function login() {
+    const u = document.getElementById('username').value;
+    const p = document.getElementById('password').value;
+
+    if (u === "vip1" && p === "vip1") {
+      document.getElementById('loginBox').style.display = "none";
+      document.getElementById('panelBox').style.display = "block";
+    } else {
+      alert("❌ Sai tài khoản hoặc mật khẩu!");
+    }
+  }
+
+  function toggleAimbot() {
+    const isChecked = document.getElementById('aimToggle').checked;
+    const status = document.getElementById('aimStatus');
+
+    if (isChecked) {
+      alert("🎯 AIMBOT ACTIVATED!");
+      status.textContent = "AIMBOT: BẬT";
+      status.style.color = "#0f0";
+    } else {
+      status.textContent = "AIMBOT: TẮT";
+      status.style.color = "#888";
+    }
+  }
+
+  // Hiệu ứng tuyết rơi
+  const snowContainer = document.getElementById('snow');
+  for (let i = 0; i < 100; i++) {
+    let snow = document.createElement('div');
+    snow.style.position = 'absolute';
+    snow.style.width = '5px';
+    snow.style.height = '5px';
+    snow.style.background = 'white';
+    snow.style.borderRadius = '50%';
+    snow.style.top = Math.random() * window.innerHeight + 'px';
+    snow.style.left = Math.random() * window.innerWidth + 'px';
+    snow.style.opacity = Math.random();
+    snow.style.animation = `fall ${5 + Math.random() * 5}s linear infinite`;
+    snowContainer.appendChild(snow);
+  }
+
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes fall {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(100vh); }
+    }
+  `;
+  document.head.appendChild(style);
+</script>
+
+</body>
+</html>
